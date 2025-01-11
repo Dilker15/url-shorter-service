@@ -1,0 +1,25 @@
+{
+  "name": "url-shorter-services",
+  "version": "1.0.0",
+  "description": "shorter url",
+  "main": "app.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev":"nodemon",
+    "start":"npm run build && node dist/app.js",
+    "build":"rimraf ./dist && tsc"
+  },
+  "author": "D1lk3r",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^22.10.5",
+    "nodemon": "^3.1.9",
+    "rimraf": "^6.0.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.3"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.21.2"
+  }
+}
