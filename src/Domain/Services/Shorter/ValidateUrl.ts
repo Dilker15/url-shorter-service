@@ -5,12 +5,15 @@ export class ValidateUrlService{
 
 
     static validate(url:string):void{
-        console.log("body in validate : ",url);
+        
         if(!url){
             throw new Error('Url does not exist');
         }
-        let match = this.verifyCorrectUrl(url);
-        console.log("this is match : ", match)
+
+        if(!this.verifyCorrectUrl(url)){
+            throw new Error('Url is not correct');
+        }
+
     }
 
 

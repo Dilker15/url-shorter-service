@@ -12,12 +12,10 @@ export class UseCaseUpdateShortenUrl{
     }
 
 
-    async execute(body:{[key:string]:any}):Promise<UrlEntity>{
+    async execute(body:{[key:string]:any},shortUrl:string):Promise<UrlEntity>{
         ValidateUrlService.validate(body.url);
-        let shortUrl = ShortUrlAdaper.generateShortUrl(body.url);
-        
-
-        return UrlEntity.fromObjectToUrlEntity({});
+        const updatedUrl = await this.repo.updatetUrl(shortUrl,body.url);
+        return updatedUrl;
     }
 
 }
