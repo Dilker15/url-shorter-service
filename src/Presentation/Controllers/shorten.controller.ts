@@ -13,10 +13,7 @@ export class ShortenController{
         readonly updateUc:UseCaseUpdateShortenUrl,
         readonly deleteUc:UseCaseDeleteShortenUrl,
         readonly getUc:UseCaseGetShortenUrl
-    ){
-       
-        
-    }
+    ){}
 
 
 
@@ -48,16 +45,32 @@ export class ShortenController{
     }
 
 
-    deleteUrl = (req:Request,res:Response)=>{
-        res.json({
-            "data":"delete Url short",
+    deleteUrl = async(req:Request,res:Response)=>{
+       try{
+            const urlDeleted = await this.deleteUc.execute(req.params.shortUrl);
+            res.status(200).json(urlDeleted); 
+       }catch(error){
+        console.log(error);
+         res.json({
+            "error":error,
         })
+       }
     }
 
 
-    updateUrl = (req:Request,res:Response)=>{
-        res.json({
-            "data":"update Url short",
-        })
+    updateUrl = async(req:Request,res:Response)=>{
+        const {shortUrl} = req.params;
+        try{
+            const updatedURL = await this.updateUc.execute(req.body,shortUrl);
+            res.json({
+                updatedURL,
+            })
+        }catch(error){
+            console.log(error);
+            res.json(
+                error,
+            )
+        }
+
     }
 }
