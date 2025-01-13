@@ -12,12 +12,13 @@ export class UseCaseDeleteShortenUrl{
     }
 
 
-    async execute(body:{[key:string]:any}):Promise<UrlEntity>{
-        ValidateUrlService.validate(body.url);
-        let shortUrl = ShortUrlAdaper.generateShortUrl(body.url);
+    async execute(shortUrl:string):Promise<UrlEntity>{
         
-
-        return UrlEntity.fromObjectToUrlEntity({});
+        if(!shortUrl){
+            throw new Error('Short Url is missing')
+        }
+        const deletedUrl = await this.repo.deleteUrl(shortUrl);
+        return deletedUrl;
     }
 
 }
